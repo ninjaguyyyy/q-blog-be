@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException, PipeTransform } from '@nestjs/common';
-import { AnyKeys, Types } from 'mongoose';
+import { Types } from 'mongoose';
 
 @Injectable()
 export class ParseObjectIdPipe implements PipeTransform {

@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, FilterQuery } from 'mongoose';
 import { PostPostDto } from './dto/post.post.dto';
 import { Post, PostDocument } from './schemas/post.schema';
 
@@ -12,9 +12,27 @@ export class PostsService {
     private configService: ConfigService,
   ) {}
 
-  async findAll(): Promise<Post[]> {
-    console.log(this.configService.get('JWT_SECRET'));
-    return this.postModel.find().exec();
+  async findAll(page = 1, limit = 0, search?: string) {
+    console.log('search', search);
+    let filters: FilterQuery<PostDocument> = {};
+    search &&
+      (filters = {
+        $or: [
+          { title: new RegExp(search, 'i') },
+          { content: new RegExp(search, 'i') },
+        ],
+      });
+
+    const posts = await this.postModel
+      .find(filters)
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .lean()
+      .exec();
+
+    const total = await this.postModel.count().exec();
+
+    return { posts, total };
   }
 
   async findOne(id: string): Promise<Post> {

@@ -7,10 +7,12 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { GetPostsQueryParams } from './dto/getPosts-query.dto';
 import { PostPostDto } from './dto/post.post.dto';
 import { ParseObjectIdPipe } from './pipes/parse-objectId.pipe';
 import { PostsService } from './posts.service';
@@ -21,8 +23,8 @@ export class PostsController {
   constructor(private postsService: PostsService) {}
 
   @Get()
-  getPosts() {
-    return this.postsService.findAll();
+  getPosts(@Query() { page, limit, search }: GetPostsQueryParams) {
+    return this.postsService.findAll(page, limit, search);
   }
 
   @Get(':id')
