@@ -7,6 +7,9 @@ export class PostPostDto {
   title: string;
 
   @ApiProperty()
+  isPublished: boolean;
+
+  @ApiProperty()
   @IsDateString()
   publishDate: Date;
 
