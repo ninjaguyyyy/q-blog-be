@@ -25,6 +25,11 @@ export class PostsController {
     return this.postsService.findAll();
   }
 
+  @Get(':id')
+  async getPost(@Param('id', ParseObjectIdPipe) id: string) {
+    return this.postsService.findOne(id);
+  }
+
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Post()
@@ -32,6 +37,7 @@ export class PostsController {
     await this.postsService.create(payload);
   }
 
+  @ApiBearerAuth()
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
   patchProfile(

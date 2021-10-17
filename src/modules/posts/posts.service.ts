@@ -1,4 +1,4 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -17,6 +17,16 @@ export class PostsService {
     return this.postModel.find().exec();
   }
 
+  async findOne(id: string): Promise<Post> {
+    const post = await this.postModel.findById(id).lean().exec();
+    // .populate('categories')
+    // .populate('series');
+    if (!post) {
+      throw new NotFoundException();
+    }
+    return post;
+  }
+
   async create(payload: PostPostDto): Promise<Post> {
     const createdPost = new this.postModel(payload);
     return createdPost.save();
@@ -27,10 +37,11 @@ export class PostsService {
       .findByIdAndUpdate(id, payload, {
         new: true,
       })
+      .lean()
       .exec();
 
     if (!updatedPost) {
-      throw new BadRequestException(
+      throw new NotFoundException(
         'The post with that id does not exist in the system. Please try another id.',
       );
     }
@@ -42,7 +53,7 @@ export class PostsService {
     const removedPost = await this.postModel.findByIdAndRemove(id).exec();
 
     if (!removedPost) {
-      throw new BadRequestException(
+      throw new NotFoundException(
         'The post with that id does not exist in the system. Please try another id.',
       );
     }

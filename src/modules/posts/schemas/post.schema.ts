@@ -12,7 +12,7 @@ export class Post {
   isPublished: boolean;
 
   @Prop()
-  publishDate: Date;
+  publishedDate: Date;
 
   @Prop()
   content: string;
