@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsDateString, IsNotEmpty } from 'class-validator';
 
-export class PostPostPayload {
+export class PostPostDto {
   @ApiProperty()
   @IsNotEmpty()
   title: string;
@@ -11,5 +11,5 @@ export class PostPostPayload {
   publishDate: Date;
 
   @ApiProperty()
-  name: string;
+  content: string;
 }

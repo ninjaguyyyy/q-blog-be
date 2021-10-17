@@ -9,10 +9,13 @@ export class Post {
   title: string;
 
   @Prop()
+  isPublished: boolean;
+
+  @Prop()
   publishDate: Date;
 
   @Prop()
-  name: string;
+  content: string;
 }
 
 export const PostSchema = SchemaFactory.createForClass(Post);
