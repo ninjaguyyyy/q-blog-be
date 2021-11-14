@@ -8,7 +8,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { ParseObjectIdPipe } from '../posts/pipes/parse-objectId.pipe';
+import { ParseObjectIdPipe } from '../../utils/pipes/parse-objectId.pipe';
 import { CategoriesService } from './categories.service';
 import { CategoryDto } from './dto/category.dto';
 

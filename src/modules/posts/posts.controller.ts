@@ -14,7 +14,8 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { GetPostsQueryParams } from './dto/getPosts-query.dto';
 import { PostPostDto } from './dto/post.post.dto';
-import { ParseObjectIdPipe } from './pipes/parse-objectId.pipe';
+import { UpdatePostDto } from './dto/update.post.dto';
+import { ParseObjectIdPipe } from '../../utils/pipes/parse-objectId.pipe';
 import { PostsService } from './posts.service';
 
 @ApiTags('posts')
@@ -33,7 +34,7 @@ export class PostsController {
   }
 
   @ApiBearerAuth()
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   @Post()
   async createPost(@Body() payload: PostPostDto) {
     await this.postsService.create(payload);
@@ -41,10 +42,10 @@ export class PostsController {
 
   @ApiBearerAuth()
   @Patch(':id')
-  @UseGuards(JwtAuthGuard)
+  // @UseGuards(JwtAuthGuard)
   patchProfile(
     @Param('id', ParseObjectIdPipe) id: string,
-    @Body() payload: PostPostDto,
+    @Body() payload: UpdatePostDto,
   ) {
     return this.postsService.update(id, payload);
   }

@@ -1,12 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsDateString,
-  IsMongoId,
-  IsNotEmpty,
-  IsOptional,
-} from 'class-validator';
+import { IsDateString, IsNotEmpty, IsOptional } from 'class-validator';
+import { Category } from 'src/modules/categories/category.schema';
+import { Series } from 'src/modules/series/series.schema';
 
-export class PostPostDto {
+export class UpdatePostDto {
   @ApiProperty()
   @IsNotEmpty()
   title: string;
@@ -22,11 +19,9 @@ export class PostPostDto {
   content: string;
 
   @ApiProperty()
-  @IsMongoId({ each: true })
-  categories: string[];
+  categories: Category[];
 
   @ApiProperty()
-  @IsMongoId({ each: true })
   @IsOptional()
-  series?: string[];
+  series?: Series[];
 }

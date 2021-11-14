@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "env": {
+    "DB_URL": "mongodb+srv://admin:admin99@blogcluster.lehcf.mongodb.net/q-blog?retryWrites=true&w=majority",
+    "JWT_SECRET": "coder9/7"
+  },
+  "builds": [
+    {
+      "src": "src/main.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/main.ts",
+      "methods": ["GET", "POST", "PUT", "DELETE"]
+    }
+  ]
+}

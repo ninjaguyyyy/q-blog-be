@@ -3,6 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, FilterQuery } from 'mongoose';
 import { PostPostDto } from './dto/post.post.dto';
+import { UpdatePostDto } from './dto/update.post.dto';
 import { Post, PostDocument } from './schemas/post.schema';
 
 @Injectable()
@@ -13,7 +14,6 @@ export class PostsService {
   ) {}
 
   async findAll(page = 1, limit = 0, search?: string) {
-    console.log('search', search);
     let filters: FilterQuery<PostDocument> = {};
     search &&
       (filters = {
@@ -50,7 +50,7 @@ export class PostsService {
     return createdPost.save();
   }
 
-  async update(id: string, payload: PostPostDto): Promise<Post> {
+  async update(id: string, payload: UpdatePostDto): Promise<Post> {
     const updatedPost = await this.postModel
       .findByIdAndUpdate(id, payload, {
         new: true,
