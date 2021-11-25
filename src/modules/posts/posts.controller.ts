@@ -34,7 +34,7 @@ export class PostsController {
   }
 
   @ApiBearerAuth()
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Post()
   async createPost(@Body() payload: PostPostDto) {
     await this.postsService.create(payload);
@@ -42,7 +42,7 @@ export class PostsController {
 
   @ApiBearerAuth()
   @Patch(':id')
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   patchProfile(
     @Param('id', ParseObjectIdPipe) id: string,
     @Body() payload: UpdatePostDto,

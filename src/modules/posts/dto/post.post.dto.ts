@@ -23,7 +23,8 @@ export class PostPostDto {
 
   @ApiProperty()
   @IsMongoId({ each: true })
-  categories: string[];
+  @IsOptional()
+  categories?: string[];
 
   @ApiProperty()
   @IsMongoId({ each: true })

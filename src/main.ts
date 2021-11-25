@@ -2,7 +2,6 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { join } from 'path';
 import { AppModule } from './modules/app/app.module';
 
 export const SWAGGER_API_ROOT = 'api/docs';
@@ -20,11 +19,7 @@ async function bootstrap() {
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('/swagger', app, document);
-
-  app.useStaticAssets(join(__dirname, '/static'), {
-    prefix: '/swagger',
-  });
+  SwaggerModule.setup(SWAGGER_API_ROOT, app, document);
 
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
 

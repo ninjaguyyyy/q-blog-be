@@ -27,6 +27,8 @@ export class PostsService {
       .find(filters)
       .skip((page - 1) * limit)
       .limit(limit)
+      .populate('categories')
+      .populate('series')
       .lean()
       .exec();
 
