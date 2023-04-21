@@ -1,17 +1,18 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule, MongooseModuleAsyncOptions } from '@nestjs/mongoose';
-import { AuthModule } from '../auth/auth.module';
-import { CategoriesModule } from '../categories/categories.module';
-import { PostsModule } from '../posts/posts.module';
-import { SeriesModule } from '../series/series.module';
-import { UsersModule } from '../users/users.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { CustomConfigModule } from 'src/config/config.module';
+import { UsersModule } from 'src/modules/users/users.module';
+import { PostsModule } from 'src/modules/posts/posts.module';
+import { AuthModule } from 'src/modules/auth/auth.module';
+import { CategoriesModule } from 'src/modules/categories/categories.module';
+import { SeriesModule } from 'src/modules/series/series.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    CustomConfigModule,
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

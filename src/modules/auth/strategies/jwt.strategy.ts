@@ -6,10 +6,11 @@ import { JwtPayloadType } from '../types/jwtPayload.type';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private configService: ConfigService) {
+  constructor(public readonly configService: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
+      // secretOrKey: 'test' || configService.get('JWT_SECRET'),
       secretOrKey: configService.get('JWT_SECRET'),
     });
   }
