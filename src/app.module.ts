@@ -4,11 +4,10 @@ import { MongooseModule, MongooseModuleAsyncOptions } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CustomConfigModule } from 'src/config/config.module';
-import { UsersModule } from 'src/modules/users/users.module';
-import { PostsModule } from 'src/modules/posts/posts.module';
-import { AuthModule } from 'src/modules/auth/auth.module';
-import { CategoriesModule } from 'src/modules/categories/categories.module';
-import { SeriesModule } from 'src/modules/series/series.module';
+import { AuthModule } from 'src/features/auth/auth.module';
+import { CategoriesModule } from 'src/features/categories/categories.module';
+import { PostsModule } from 'src/features/posts/post.module';
+import { UsersModule } from 'src/features/users/user.module';
 
 @Module({
   imports: [
@@ -27,7 +26,6 @@ import { SeriesModule } from 'src/modules/series/series.module';
     AuthModule,
     UsersModule,
     CategoriesModule,
-    SeriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
