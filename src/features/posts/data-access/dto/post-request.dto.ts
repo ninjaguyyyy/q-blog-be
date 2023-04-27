@@ -51,11 +51,6 @@ export class CreatePostBodyDto {
   @IsMongoId({ each: true })
   @IsOptional()
   categories?: string[];
-
-  @ApiProperty()
-  @IsMongoId({ each: true })
-  @IsOptional()
-  series?: string[];
 }
 
 export class UpdatePostBodyDto {
