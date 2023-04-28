@@ -8,6 +8,9 @@ import { AuthModule } from 'src/features/auth/auth.module';
 import { CategoriesModule } from 'src/features/categories/categories.module';
 import { PostsModule } from 'src/features/posts/post.module';
 import { UsersModule } from 'src/features/users/user.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AbilityGuard } from 'src/features/ability/ability.guard';
+import { AbilityModule } from 'src/features/ability/ability.module';
 
 @Module({
   imports: [
@@ -26,8 +29,15 @@ import { UsersModule } from 'src/features/users/user.module';
     AuthModule,
     UsersModule,
     CategoriesModule,
+    AbilityModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: AbilityGuard,
+    // },
+  ],
 })
 export class AppModule {}

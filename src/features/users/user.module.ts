@@ -5,13 +5,13 @@ import {
   User,
   UserSchema,
 } from 'src/features/users/data-access/schemas/user.schema';
-import { UsersService } from 'src/features/users/data-access/services/user.service';
+import { UserService } from 'src/features/users/data-access/services/user.service';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],
-  providers: [UsersService, UserRepository],
-  exports: [UsersService],
+  providers: [UserService, UserRepository],
+  exports: [UserService],
 })
 export class UsersModule {}

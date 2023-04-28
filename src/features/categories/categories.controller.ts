@@ -13,6 +13,10 @@ import { ParseObjectIdPipe } from '../../utils/pipes/parse-objectId.pipe';
 import { JwtAuthGuard } from '../../guards/jwt-auth.guard';
 import { CategoriesService } from 'src/features/categories/data-access/services/categories.service';
 import { CategoryBodyDto } from 'src/features/categories/data-access/dto/category-request.dto';
+import { Action } from 'src/features/ability/ability.factory';
+import { CheckAbilities } from 'src/features/ability/ability.decorator';
+import { Category } from 'src/features/categories/category.schema';
+import { AbilityGuard } from 'src/features/ability/ability.guard';
 
 @ApiTags('categories')
 @Controller('categories')
@@ -30,13 +34,15 @@ export class CategoriesController {
   }
 
   @Post()
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, AbilityGuard)
+  @CheckAbilities({ action: Action.Create, subject: Category })
   createCategory(@Body() category: CategoryBodyDto) {
     return this.categoriesService.create(category);
   }
 
   @Put(':id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, AbilityGuard)
+  @CheckAbilities({ action: Action.Update, subject: Category })
   updateCategory(
     @Param('id', ParseObjectIdPipe) id: string,
     @Body() category: CategoryBodyDto,
@@ -45,7 +51,8 @@ export class CategoriesController {
   }
 
   @Delete(':id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, AbilityGuard)
+  @CheckAbilities({ action: Action.Delete, subject: Category })
   deleteCategory(@Param('id', ParseObjectIdPipe) id: string) {
     return this.categoriesService.delete(id);
   }

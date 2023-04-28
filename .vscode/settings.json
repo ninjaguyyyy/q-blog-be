@@ -18,5 +18,6 @@
     "titleBar.inactiveBackground": "#ea284599",
     "titleBar.inactiveForeground": "#e7e7e799"
   },
-  "peacock.color": "#ea2845"
+  "peacock.color": "#ea2845",
+  "cSpell.words": ["casl"]
 }

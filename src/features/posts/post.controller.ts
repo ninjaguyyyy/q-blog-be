@@ -6,20 +6,24 @@ import {
   HttpCode,
   Param,
   Patch,
+  Post,
   Query,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { ParseObjectIdPipe } from '../../utils/pipes/parse-objectId.pipe';
-import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
-import { Post } from '@nestjs/common';
-import { PostsService } from 'src/features/posts/data-access/services/post.service';
+import { CheckAbilities } from 'src/features/ability/ability.decorator';
+import { Action } from 'src/features/ability/ability.factory';
+import { AbilityGuard } from 'src/features/ability/ability.guard';
 import {
   CreatePostBodyDto,
   GetPostsQueryDto,
   UpdatePostBodyDto,
 } from 'src/features/posts/data-access/dto/post-request.dto';
 import { PostResponseDto } from 'src/features/posts/data-access/dto/post-response.dto';
+import { Post as PostModel } from 'src/features/posts/data-access/schemas/post.schema';
+import { PostsService } from 'src/features/posts/data-access/services/post.service';
+import { JwtAuthGuard } from 'src/guards/jwt-auth.guard';
+import { ParseObjectIdPipe } from '../../utils/pipes/parse-objectId.pipe';
 
 @ApiTags('posts')
 @Controller('api/posts')
@@ -37,14 +41,16 @@ export class PostsController {
     return this.postsService.getPostById(id);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, AbilityGuard)
+  @CheckAbilities({ action: Action.Create, subject: PostModel })
   @ApiBearerAuth()
   @Post()
   createPost(@Body() payload: CreatePostBodyDto) {
     return this.postsService.createPost(payload);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, AbilityGuard)
+  @CheckAbilities({ action: Action.Update, subject: PostModel })
   @ApiBearerAuth()
   @Patch(':id')
   patchProfile(
@@ -54,7 +60,8 @@ export class PostsController {
     return this.postsService.updatePost(id, payload);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, AbilityGuard)
+  @CheckAbilities({ action: Action.Delete, subject: PostModel })
   @ApiBearerAuth()
   @Delete(':id')
   @HttpCode(204)

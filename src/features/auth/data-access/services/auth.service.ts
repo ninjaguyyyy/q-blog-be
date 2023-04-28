@@ -6,12 +6,12 @@ import { SignUpBodyDto } from 'src/features/auth/data-access/dto/sign-up.dto';
 import { JwtPayloadType } from 'src/features/auth/types/jwtPayload.type';
 import { hashPassword } from 'src/features/auth/utils/auth.util';
 import { User } from 'src/features/users/data-access/schemas/user.schema';
-import { UsersService } from 'src/features/users/data-access/services/user.service';
+import { UserService } from 'src/features/users/data-access/services/user.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private usersService: UsersService,
+    private usersService: UserService,
     private jwtService: JwtService,
   ) {}
 
