@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Category } from 'src/features/categories/category.schema';
+import { Category } from 'src/features/categories/data-access/schemas/category.schema';
 
 export class PostResponseDto {
   @ApiProperty()

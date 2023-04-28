@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import {
   Category,
   CategoryDocument,
-} from 'src/features/categories/category.schema';
+} from 'src/features/categories/data-access/schemas/category.schema';
 import { CategoryBodyDto } from 'src/features/categories/data-access/dto/category-request.dto';
 
 @Injectable()

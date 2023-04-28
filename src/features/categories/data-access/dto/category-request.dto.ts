@@ -6,4 +6,8 @@ export class CategoryBodyDto {
   @IsNotEmpty()
   @IsString()
   name: string;
+
+  @ApiProperty()
+  @IsString()
+  parentCategoryId: string;
 }

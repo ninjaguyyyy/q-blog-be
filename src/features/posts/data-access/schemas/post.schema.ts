@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Type } from 'class-transformer';
 import { Document, Types } from 'mongoose';
-import { Category } from 'src/features/categories/category.schema';
+import { Category } from 'src/features/categories/data-access/schemas/category.schema';
 
 export type PostDocument = Post & Document;
 

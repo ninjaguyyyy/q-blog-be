@@ -9,7 +9,7 @@ import {
   IsString,
   Min,
 } from 'class-validator';
-import { Category } from 'src/features/categories/category.schema';
+import { Category } from 'src/features/categories/data-access/schemas/category.schema';
 
 export class GetPostsQueryDto {
   @ApiProperty({ required: false })

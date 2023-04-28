@@ -7,7 +7,7 @@ export class CategoriesService {
   constructor(private categoryRepository: CategoryRepository) {}
 
   async getAll() {
-    const categories = await this.categoryRepository.getAll;
+    const categories = await this.categoryRepository.getAll();
     return categories;
   }
 

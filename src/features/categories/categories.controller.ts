@@ -15,7 +15,7 @@ import { CategoriesService } from 'src/features/categories/data-access/services/
 import { CategoryBodyDto } from 'src/features/categories/data-access/dto/category-request.dto';
 import { Action } from 'src/features/ability/ability.factory';
 import { CheckAbilities } from 'src/features/ability/ability.decorator';
-import { Category } from 'src/features/categories/category.schema';
+import { Category } from 'src/features/categories/data-access/schemas/category.schema';
 import { AbilityGuard } from 'src/features/ability/ability.guard';
 
 @ApiTags('categories')

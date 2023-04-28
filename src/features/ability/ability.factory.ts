@@ -6,7 +6,7 @@ import {
   createMongoAbility,
 } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
-import { Category } from 'src/features/categories/category.schema';
+import { Category } from 'src/features/categories/data-access/schemas/category.schema';
 import { Post } from 'src/features/posts/data-access/schemas/post.schema';
 import { User } from 'src/features/users/data-access/schemas/user.schema';
 import { isAdmin } from 'src/utils/common';
