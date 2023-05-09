@@ -7,9 +7,11 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
 import { UsersModule } from 'src/features/users/user.module';
 import { AuthService } from 'src/features/auth/data-access/services/auth.service';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
+    HttpModule,
     UsersModule,
     PassportModule,
     JwtModule.registerAsync({

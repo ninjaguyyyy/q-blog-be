@@ -7,6 +7,7 @@ import { initSwagger } from 'src/swagger';
 
 async function bootstrap() {
   const app: NestExpressApplication = await NestFactory.create(AppModule);
+  app.enableCors();
 
   initSwagger(app, SWAGGER_API_ROOT);
 

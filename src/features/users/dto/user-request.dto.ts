@@ -28,3 +28,21 @@ export class GetUsersQueryDto {
   @IsString()
   search?: string;
 }
+
+export class SocialUserBodyDto {
+  @ApiProperty({ required: true })
+  @IsNotEmpty()
+  socialId: string;
+
+  @ApiProperty({ required: true })
+  @IsNotEmpty()
+  name: string;
+
+  @ApiProperty({ required: true })
+  @IsNotEmpty()
+  avatar: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  email?: string;
+}

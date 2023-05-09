@@ -59,4 +59,19 @@ export class UserRepository {
 
     return null;
   }
+
+  async upsertSocialUser(socialId, user) {
+    const socialUser = await this.userModel
+      .findOneAndUpdate(
+        {
+          socialId,
+        },
+        user,
+        { upsert: true, new: true },
+      )
+      .lean()
+      .exec();
+
+    return socialUser;
+  }
 }

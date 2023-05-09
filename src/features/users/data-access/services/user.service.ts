@@ -2,7 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { SignUpBodyDto } from 'src/features/auth/data-access/dto/sign-up.dto';
 import { UserRepository } from 'src/features/users/data-access/repositories/user.repository';
 import { User } from 'src/features/users/data-access/schemas/user.schema';
-import { GetUsersQueryDto } from 'src/features/users/dto/user-request.dto';
+import {
+  GetUsersQueryDto,
+  SocialUserBodyDto,
+} from 'src/features/users/dto/user-request.dto';
 
 @Injectable()
 export class UserService {
@@ -27,5 +30,9 @@ export class UserService {
   async delete(id: string): Promise<null> {
     const removedPost = await this.userRepository.delete(id);
     return removedPost;
+  }
+
+  async upsertSocialUser(socialId: number, user: SocialUserBodyDto) {
+    return await this.userRepository.upsertSocialUser(socialId, user);
   }
 }

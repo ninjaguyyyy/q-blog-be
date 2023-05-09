@@ -10,3 +10,19 @@ export class LoginBodyDto {
   @IsNotEmpty()
   password: string;
 }
+
+export class LoginWithGoogleBodyDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  accessToken: string;
+}
+
+export class LoginWithFacebookBodyDto {
+  @ApiProperty()
+  @IsNotEmpty()
+  userID: string;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  accessToken: string;
+}
