@@ -7,6 +7,7 @@ import {
   Post,
   Put,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ParseObjectIdPipe } from '../../utils/pipes/parse-objectId.pipe';
@@ -17,13 +18,16 @@ import { Action } from 'src/features/ability/ability.factory';
 import { CheckAbilities } from 'src/features/ability/ability.decorator';
 import { Category } from 'src/features/categories/data-access/schemas/category.schema';
 import { AbilityGuard } from 'src/features/ability/ability.guard';
+import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
 
 @ApiTags('categories')
-@Controller('categories')
+@Controller('api/categories')
+@UseInterceptors(CacheInterceptor)
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Get()
+  @CacheKey('custom_key')
   getCategories() {
     return this.categoriesService.getAll();
   }
