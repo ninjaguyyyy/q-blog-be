@@ -36,13 +36,23 @@ export class PostRepository {
       .lean()
       .exec();
 
-    const total = await this.postModel.count().exec();
+    const total = await this.postModel.count(filters).exec();
 
     return { posts, total };
   }
 
   async getPostById(id: string): Promise<Post> {
     const post = await this.postModel.findById(id).lean().exec();
+
+    if (!post) {
+      throw new NotFoundException();
+    }
+
+    return post;
+  }
+
+  async getPostBySlug(slug: string): Promise<Post> {
+    const post = await this.postModel.findOne({ slug }).lean().exec();
 
     if (!post) {
       throw new NotFoundException();

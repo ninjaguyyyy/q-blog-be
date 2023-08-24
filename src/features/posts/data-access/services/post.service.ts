@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import {
   CreatePostBodyDto,
   GetPostsQueryDto,
@@ -18,6 +18,11 @@ export class PostsService {
 
   async getPostById(id: string): Promise<Post> {
     const post = await this.postRepository.getPostById(id);
+    return post;
+  }
+
+  async getPostBySlug(slug: string): Promise<Post> {
+    const post = await this.postRepository.getPostBySlug(slug);
     return post;
   }
 

@@ -19,6 +19,12 @@ export class Post {
   @Prop()
   content: string;
 
+  @Prop()
+  image: string;
+
+  @Prop()
+  slug: string;
+
   @Prop({
     type: [{ type: Types.ObjectId, ref: Category.name }],
   })

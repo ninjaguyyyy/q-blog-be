@@ -41,6 +41,12 @@ export class PostsController {
     return this.postsService.getPostById(id);
   }
 
+  @Get('/by-slug/:slug')
+  @ApiOkResponse({ type: PostResponseDto })
+  getPostBySlug(@Param('slug') slug: string) {
+    return this.postsService.getPostBySlug(slug);
+  }
+
   @UseGuards(JwtAuthGuard, AbilityGuard)
   @CheckAbilities({ action: Action.Create, subject: PostModel })
   @ApiBearerAuth()
