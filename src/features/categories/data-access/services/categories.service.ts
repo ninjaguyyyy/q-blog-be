@@ -1,5 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { Cron, CronExpression } from '@nestjs/schedule';
+import { Injectable } from '@nestjs/common';
 import { CategoryBodyDto } from 'src/features/categories/data-access/dto/category-request.dto';
 import { CategoryRepository } from 'src/features/categories/data-access/repositories/category.repository';
 
@@ -9,7 +8,6 @@ export class CategoriesService {
 
   async getAll() {
     const categories = await this.categoryRepository.getAll();
-    console.log('call service');
     return categories;
   }
 
@@ -31,11 +29,5 @@ export class CategoriesService {
   async delete(id: string) {
     const removedCategory = await this.categoryRepository.delete(id);
     return removedCategory;
-  }
-
-  // @Cron('45 * * * * *')
-  @Cron(CronExpression.EVERY_2_HOURS)
-  handleCron() {
-    Logger.log('Called when the current second is 45');
   }
 }
