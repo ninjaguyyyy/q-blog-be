@@ -8,16 +8,16 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install the dependencies
-RUN npm install --legacy-peer-deps
+RUN yarn install --prod --frozen-lockfile
 
 # Copy the rest of the application code to the container
 COPY . .
 
 # Build the application
-RUN npm run build
+RUN yarn run build
 
 # Expose the port that the application will listen on
 EXPOSE 5000
 
 # Start the application
-CMD ["npm", "run", "start:prod"]
+CMD ["yarn", "run", "start:prod"]
