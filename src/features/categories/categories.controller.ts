@@ -1,24 +1,24 @@
+import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
 import {
   Body,
   Controller,
   Delete,
   Get,
   Param,
+  Patch,
   Post,
-  Put,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { ParseObjectIdPipe } from '../../utils/pipes/parse-objectId.pipe';
-import { JwtAuthGuard } from '../../guards/jwt-auth.guard';
-import { CategoriesService } from 'src/features/categories/data-access/services/categories.service';
-import { CategoryBodyDto } from 'src/features/categories/data-access/dto/category-request.dto';
-import { Action } from 'src/features/ability/ability.factory';
 import { CheckAbilities } from 'src/features/ability/ability.decorator';
-import { Category } from 'src/features/categories/data-access/schemas/category.schema';
+import { Action } from 'src/features/ability/ability.factory';
 import { AbilityGuard } from 'src/features/ability/ability.guard';
-import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
+import { CategoryBodyDto } from 'src/features/categories/data-access/dto/category-request.dto';
+import { Category } from 'src/features/categories/data-access/schemas/category.schema';
+import { CategoriesService } from 'src/features/categories/data-access/services/categories.service';
+import { JwtAuthGuard } from '../../guards/jwt-auth.guard';
+import { ParseObjectIdPipe } from '../../utils/pipes/parse-objectId.pipe';
 
 @ApiTags('categories')
 @Controller('api/categories')
@@ -44,7 +44,7 @@ export class CategoriesController {
     return this.categoriesService.create(category);
   }
 
-  @Put(':id')
+  @Patch(':id')
   @UseGuards(JwtAuthGuard, AbilityGuard)
   @CheckAbilities({ action: Action.Update, subject: Category })
   updateCategory(
