@@ -15,7 +15,7 @@ export class CategoryRepository {
   ) {}
 
   async getAll() {
-    return this.categoryModel.find().lean().exec();
+    return this.categoryModel.find().populate('parentCategory').lean().exec();
   }
 
   async getById(id: string) {
