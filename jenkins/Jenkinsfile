@@ -1,45 +1,7 @@
-﻿
-pipeline {
+﻿pipeline {
     agent any
 
     stages {
-        // Select environment
-        // -- Test Environment
-        // stage('Use Test Env') {
-        //     when {
-        //         branch 'test'
-        //     }
-        //     steps {
-        //         script {
-        //             env.TAG = 'test'
-        //             env.ENV_FILE = "${env.ENV_TEST}"
-        //             env.SERVER_URL = "${env.SERVER_URL_TEST}"
-        //             env.SERVER_SSH_KEY_FILE = "${env.SERVER_SSH_KEY_FILE_TEST}"
-        //             env.APP_URL = "${env.APP_URL_TEST}"
-        //         }
-
-        //         echo "BUILD_ENV: test"
-        //         echo "TAG: $TAG"
-        //     }
-        // }
-        // -- Production Environment
-        // stage('Use Production Env') {
-        //     when {
-        //         branch 'master'
-        //     }
-        //     steps {
-        //         script {
-        //             env.TAG = 'production'
-        //             env.ENV_FILE = "${env.ENV_PRODUCTION}"
-        //             env.SERVER_URL = "${env.SERVER_URL_PRODUCTION}"
-        //             env.SERVER_SSH_KEY_FILE = "${env.SERVER_SSH_KEY_FILE_PRODUCTION}"
-        //             env.APP_URL = "${env.APP_URL_PRODUCTION}"
-        //         }
-
-        //         echo "BUILD_ENV: production"
-        //         echo "TAG: $TAG"
-        //     }
-        // }
         // Build
         stage('Build') {
             steps {
@@ -56,5 +18,4 @@ pipeline {
             }
         }
     }
-
 }
